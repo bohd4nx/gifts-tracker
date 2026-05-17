@@ -6,7 +6,6 @@ from app.core import config
 
 
 def gift_emoji(gift_data: dict[str, Any]) -> str:
-    """Returns a custom emoji tag using the stored emoji_id, or plain 🎁."""
     emoji_id = gift_data.get("emoji_id")
     if emoji_id:
         return f'<emoji id="{emoji_id}">🎁</emoji>'

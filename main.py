@@ -1,5 +1,4 @@
 import asyncio
-import sqlite3
 from pathlib import Path
 
 from aiogram import Bot
@@ -24,13 +23,13 @@ async def main() -> None:
         api_id=config.API_ID,
         api_hash=config.API_HASH,
         phone_number=config.PHONE_NUMBER,
-        password=config.PASSWORD if config.PASSWORD else None,
-        device_model="MacBook Pro M3 Pro",
-        system_version="macOS 26.2",
-        app_version="Telegram Desktop 6.5 arm64",
+        password=config.PASSWORD or "",
+        device_model="PC 64bit",
+        system_version="Windows 10",
+        app_version="6.8.2 x64",
         lang_pack="tdesktop",
         lang_code="en",
-        workdir=str(Path(__file__).resolve().parent / "data"),
+        workdir=str(Path(__file__).parent / "session"),
         client_platform=enums.ClientPlatform.DESKTOP,
         plugins=dict(root="app.commands"),
         parse_mode=enums.ParseMode.HTML,
@@ -63,11 +62,6 @@ if __name__ == "__main__":
         asyncio.run(main())
     except (AuthKeyUnregistered, AuthKeyDuplicated, SessionRevoked):
         logger.error("Authorization error: Session expired or invalid. Please re-authenticate.")
-    except sqlite3.OperationalError as ex:
-        if "database is locked" in str(ex).lower():
-            logger.error("Authorization error: Session expired or invalid. Please re-authenticate.")
-        else:
-            logger.exception(f"Unexpected session error: {ex}")
     except (KeyboardInterrupt, SystemExit):
         logger.info("Program successfully terminated")
     except Exception as ex:

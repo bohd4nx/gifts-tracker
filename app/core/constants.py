@@ -14,7 +14,6 @@ EMOJIS = {
 STATUS_EMOJIS = {
     "header": '<emoji id="5258503720928288433">ℹ️</emoji>',
     "datacenter": '<emoji id="5260687681733533075">👨‍💻</emoji>',
-    "uptime": '<emoji id="5323761960829862762">⚡️</emoji>',
     "interval": '<emoji id="5258419835922030550">🕔</emoji>',
     "total_gifts": '<emoji id="5257965810634202885">🎁</emoji>',
 }
