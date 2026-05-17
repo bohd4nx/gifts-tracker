@@ -35,5 +35,10 @@ class Config:
         self.EMOJI_PACK_SHORT_NAME: str = os.getenv("EMOJI_PACK_SHORT_NAME", "GiftsTrackerPack")
         self.EMOJI_PACK_TITLE: str = os.getenv("EMOJI_PACK_TITLE", "Gifts by @GiftsTracker")
 
+        self.DATABASE_URL: str = os.getenv(
+            "DATABASE_URL",
+            "postgresql+psycopg://giftsuser:giftspass@localhost:5432/giftsdb",
+        )
+
 
 config = Config()
