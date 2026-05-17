@@ -8,7 +8,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core import config
 from app.core.constants import STATUS_EMOJIS
-from app.database import GiftsCRUD, with_session
+from app.database import with_session
+from app.database.crud import count_gifts
 from app.utils import format_uptime
 
 STARTED_AT = datetime.now(UTC)
@@ -16,7 +17,7 @@ STARTED_AT = datetime.now(UTC)
 
 @with_session
 async def handle_status(client: Client, message: Message, session: AsyncSession) -> None:
-    total_gifts = await GiftsCRUD.count(session)
+    total_gifts = await count_gifts(session)
 
     start_time = time.time()
     await client.invoke(Ping(ping_id=0))

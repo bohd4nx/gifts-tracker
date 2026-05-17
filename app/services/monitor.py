@@ -6,7 +6,8 @@ from pyrogram import Client
 from pyrogram.errors import FloodWait
 
 from app.core import config
-from app.database import GiftsCRUD, SessionLocal
+from app.database import SessionLocal
+from app.database.crud import get_all_gifts, row_to_schema, upsert_gifts
 
 from .emoji_pack import init_pack
 from .new_gift import process_gifts
@@ -27,12 +28,12 @@ async def run_gift_monitor(app: Client, bot: Bot) -> None:
             logger.info(f"Starting gift check cycle #{cycle_count}")
 
             async with SessionLocal() as session:
-                gifts = await GiftsCRUD.get_all(session)
-                gifts_history = {gift.id: GiftsCRUD.gifts_to_dict(gift) for gift in gifts}
+                gifts = await get_all_gifts(session)
+                gifts_history = {gift.id: row_to_schema(gift).to_dict() for gift in gifts}
 
                 has_changes, last_hash = await process_gifts(app, bot, gifts_history, last_hash)
                 if has_changes:
-                    await GiftsCRUD.save_batch(session, list(gifts_history.values()))
+                    await upsert_gifts(session, list(gifts_history.values()))
 
             await asyncio.sleep(config.INTERVAL)
         except FloodWait as e:

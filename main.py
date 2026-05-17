@@ -23,7 +23,7 @@ async def main() -> None:
         api_id=config.API_ID,
         api_hash=config.API_HASH,
         phone_number=config.PHONE_NUMBER,
-        password=config.PASSWORD if config.PASSWORD else None,
+        password=config.PASSWORD or "",
         device_model="MacBook Pro M3 Pro",
         system_version="macOS 26.2",
         app_version="Telegram Desktop 6.5 arm64",
@@ -62,11 +62,6 @@ if __name__ == "__main__":
         asyncio.run(main())
     except (AuthKeyUnregistered, AuthKeyDuplicated, SessionRevoked):
         logger.error("Authorization error: Session expired or invalid. Please re-authenticate.")
-    except sqlite3.OperationalError as ex:
-        if "database is locked" in str(ex).lower():
-            logger.error("Authorization error: Session expired or invalid. Please re-authenticate.")
-        else:
-            logger.exception(f"Unexpected session error: {ex}")
     except (KeyboardInterrupt, SystemExit):
         logger.info("Program successfully terminated")
     except Exception as ex:

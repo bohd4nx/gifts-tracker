@@ -15,7 +15,7 @@ async def notify_craft_models_changed(app: Client, gift_data: dict[str, Any]) ->
         logger.warning(f"No sticker_msg_id for craft notification of gift {gift_id}")
         return
     try:
-        variants = await app.get_gift_upgrade_variants(gift_id)
+        variants = await app.get_gift_upgrade_variants(gift_id)  # type: ignore[attr-defined]
         new_count = len(variants.models)
         old_count = (gift_data.get("raw") or {}).get("models_count") or 0
         delta = new_count - old_count

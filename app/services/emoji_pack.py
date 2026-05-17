@@ -6,7 +6,8 @@ from pyrogram import Client, raw
 from pyrogram.errors import FloodWait
 
 from app.core import config
-from app.database import GiftsCRUD, SessionLocal
+from app.database import SessionLocal
+from app.database.crud import update_gift_emoji_id
 from app.methods import (
     add_sticker_to_set,
     create_sticker_set,
@@ -88,7 +89,7 @@ async def build_emoji_pack(app: Client, short_name: str, title: str) -> None:
     pack.ref = stickerset_ref
 
     async with SessionLocal() as session:
-        await GiftsCRUD.update_emoji_id(session, first.id, first_emoji_id)
+        await update_gift_emoji_id(session, first.id, first_emoji_id)
 
     added, failed = 1, 0
     for gift in rest:
@@ -97,7 +98,7 @@ async def build_emoji_pack(app: Client, short_name: str, title: str) -> None:
             emoji_id = result.documents[-1].id
             await asyncio.sleep(1.5)
             async with SessionLocal() as session:
-                await GiftsCRUD.update_emoji_id(session, gift.id, emoji_id)
+                await update_gift_emoji_id(session, gift.id, emoji_id)
             added += 1
         except FloodWait as e:
             logger.warning(f"FloodWait {e.value}s — skipping gift {gift.id}")

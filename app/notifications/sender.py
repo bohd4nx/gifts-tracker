@@ -27,7 +27,7 @@ async def _send_or_edit(app: Client, text: str, link_preview: LinkPreviewOptions
         )
         return message_id
 
-    message = await app.send_message(chat_id=config.CHANNEL_ID, text=text, link_preview_options=link_preview)
+    message = await app.send_message(chat_id=config.CHANNEL_ID, text=text, link_preview_options=link_preview)  # type: ignore[arg-type]
     return message.id
 
 
