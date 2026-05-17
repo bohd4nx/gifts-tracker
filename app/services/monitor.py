@@ -9,8 +9,8 @@ from app.core import config
 from app.database import SessionLocal
 from app.database.crud import get_all_gifts, row_to_schema, upsert_gifts
 
-from .emoji_pack import init_pack
-from .new_gift import process_gifts
+from .emoji import init_emoji_pack
+from .processor import process_gifts
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +20,7 @@ async def run_gift_monitor(app: Client, bot: Bot) -> None:
     cycle_count = 0
     last_hash = 0
 
-    await init_pack(app)
+    await init_emoji_pack(app)
 
     while True:
         try:
