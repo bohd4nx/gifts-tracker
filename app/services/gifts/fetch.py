@@ -4,7 +4,7 @@ from typing import Any
 
 from pyrogram import Client, raw
 
-from app.utils.parse import parse_gift
+from app.utils import parse_gift
 
 logger = logging.getLogger(__name__)
 

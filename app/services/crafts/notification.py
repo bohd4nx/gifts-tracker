@@ -5,7 +5,7 @@ from pyrogram import Client
 
 from app.services.notifications.base import send_msg
 from app.services.notifications.crafts import compose_text
-from app.utils.gifts import create_link_preview, get_released_peer
+from app.utils.display import create_link_preview, get_released_peer
 
 logger = logging.getLogger(__name__)
 

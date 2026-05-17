@@ -1,29 +1,24 @@
 services:
   db:
-    image: postgres:16-alpine
-    container_name: giftsTracker_db
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: giftsuser
-      POSTGRES_PASSWORD: giftspass
-      POSTGRES_DB: giftsdb
+    image: postgres:17-alpine
+    container_name: gifts-tracker-db
+    env_file:
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U giftsuser -d giftsdb"]
-      interval: 10s
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 5s
       timeout: 5s
       retries: 5
 
   app:
     build: .
-    container_name: giftsTracker
+    container_name: gifts-tracker-app
     env_file:
       - .env
-    environment:
-      DATABASE_URL: postgresql+asyncpg://giftsuser:giftspass@db:5432/giftsdb
     volumes:
-      - ./data:/app/data
+      - .:/app
     stdin_open: true
     tty: true
     restart: unless-stopped
