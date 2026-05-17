@@ -38,8 +38,8 @@ ENV/
 
 # Configuration
 .env
-.env.local
-.env.*
+*.prod
+*.prod.yml
 
 # IDE & Editors
 .vscode/
@@ -61,4 +61,4 @@ Thumbs.db
 unknown_errors.txt
 
 # Project Specific
-tests/ 
+tests/

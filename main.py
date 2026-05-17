@@ -29,7 +29,7 @@ async def main() -> None:
         app_version="6.8.2 x64",
         lang_pack="tdesktop",
         lang_code="en",
-        workdir=str(Path(__file__).parent),
+        workdir=str(Path(__file__).parent / "session"),
         client_platform=enums.ClientPlatform.DESKTOP,
         plugins=dict(root="app.commands"),
         parse_mode=enums.ParseMode.HTML,
