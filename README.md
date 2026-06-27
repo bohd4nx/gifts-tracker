@@ -1,12 +1,14 @@
 <div align="center">
 
-<h1>Telegram Gifts Tracker</h1>
+# Telegram Gifts Tracker
 
-<p><b>Userbot that monitors new Telegram gifts, upgrade events and craft events — sends notifications and maintains a custom emoji pack.</b></p>
+[![Stars](https://img.shields.io/github/stars/bohd4nx/GiftsTracker?style=flat&color=blue&label=Stars)](https://github.com/bohd4nx/GiftsTracker/stargazers)
+[![Forks](https://img.shields.io/github/forks/bohd4nx/GiftsTracker?style=flat&color=blue&label=Forks)](https://github.com/bohd4nx/GiftsTracker/forks)
+[![Telegram](https://img.shields.io/badge/channel-@GiftsTracker-blue?style=flat&logo=telegram)](https://t.me/GiftsTracker)
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
-[![Telegram](https://img.shields.io/badge/Channel-@GiftsTracker-2CA5E0?style=flat&logo=telegram&logoColor=white)](https://t.me/GiftsTracker)
-[![Donate](https://img.shields.io/badge/Donate-TON-0098EA?style=flat&logo=ton&logoColor=white)](https://app.tonkeeper.com/transfer/UQCppfw5DxWgdVHf3zkmZS8k1mt9oAUYxQLwq2fz3nhO8No5)
+Userbot that monitors new Telegram gifts, upgrade events, and craft events — sends rich notifications and maintains a custom emoji pack.
+
+**[Follow Channel](https://t.me/GiftsTracker)** · **[Report Bug](https://github.com/bohd4nx/GiftsTracker/issues)**
 
 </div>
 
@@ -24,58 +26,55 @@
 
 ---
 
-## Installation
+## Quick Start
+
+**Requires:** Python 3.12+, PostgreSQL
 
 ```bash
 git clone https://github.com/bohd4nx/GiftsTracker.git
 cd GiftsTracker
-pip install -e .
-cp .env.example .env
+cp .env.example .env   # fill in credentials
 ```
 
-Fill in `.env` with your configuration (see `.env.example`), then:
-
 ```bash
+# Docker (recommended)
+# First run must be interactive — the userbot will ask for a login code
+docker compose run --rm app
+
+# After login the session is saved. Start normally:
+docker compose up -d
+
+# or local
+pip install -e .
 python main.py
 ```
 
 ---
 
-## Docker
+## Configuration
 
-**First run** must be interactive so the userbot can ask for the login code:
-
-```bash
-docker compose run --rm app
-```
-
-After login the session is saved to the project root. Press `Ctrl+C` to stop, then start normally:
-
-```bash
-docker compose up -d
-```
-
-Useful commands:
-
-```bash
-docker compose logs -f         # live logs
-docker compose restart         # restart
-docker compose down            # stop & remove
-docker compose up -d --build   # rebuild & restart
-```
+| Variable                    | Required | Default | Description                                     |
+| --------------------------- | -------- | ------- | ----------------------------------------------- |
+| `DATABASE_URL`              | ✅       | —       | PostgreSQL connection string                    |
+| `PHONE_NUMBER`              | ✅       | —       | Telegram account phone number                   |
+| `PASSWORD`                  | —        | —       | 2FA password (if enabled)                       |
+| `BOT_TOKEN`                 | ✅       | —       | Token from [@BotFather](https://t.me/BotFather) |
+| `CHANNEL_ID`                | ✅       | —       | Channel to send gift notifications              |
+| `STICKERS_CHANNEL_ID`       | ✅       | —       | Channel to upload gift stickers                 |
+| `STICKERS_CHANNEL_USERNAME` | ✅       | —       | Username of the stickers channel                |
+| `EMOJI_PACK_SHORT_NAME`     | ✅       | —       | Short name of the custom emoji pack             |
+| `EMOJI_PACK_TITLE`          | ✅       | —       | Display title of the custom emoji pack          |
+| `API_ID`                    | —        | `2040`  | Telegram API ID (from my.telegram.org)          |
+| `API_HASH`                  | —        | —       | Telegram API hash                               |
+| `INTERVAL`                  | —        | `15.0`  | Polling interval in seconds                     |
 
 ---
 
-## License
+## Docker Commands
 
-This project is provided as-is for educational purposes.
-
----
-
-<div align="center">
-
-### Made with ❤️ by [@bohd4nx](https://t.me/bohd4nx)
-
-**Star ⭐ this repo if you found it useful!**
-
-</div>
+```bash
+docker compose logs -f          # live logs
+docker compose restart          # restart
+docker compose down             # stop & remove
+docker compose up -d --build    # rebuild & restart
+```

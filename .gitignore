@@ -1,64 +1,35 @@
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
 *.egg-info/
-.installed.cfg
-*.egg
-
-# Build & Distribution
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-
 # Virtual Environment
-venv/
 .venv/
-env/
-ENV/
+venv/
 
-# Database & Session
-*.db
-*.db-*
-*.sqlite
-*.sqlite3
-*.session
-*.session-*
-
-# Configuration
+# Environment & Secrets
 .env
-*.prod
-*.prod.yml
+.env.*
 
-# IDE & Editors
+# Session files (Pyrogram)
+*.session
+*.session-journal
+session/
+
+# IDE
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 .DS_Store
 
 # Logs
 logs/
 *.log
-client.log
 
-# Temp & Cache
+# Project Specific
 *.tmp
 *.cache
 Thumbs.db
 unknown_errors.txt
-
-# Project Specific
 tests/
+docker-compose.*.yml
