@@ -20,12 +20,9 @@ STATUS_EMOJIS = {
 
 # footer appended to every notification with marketplace links
 FOOTER = (
-    '<emoji id="5418343793592135531">🏪</emoji> '
-    '<a href="https://t.me/portals/market?startapp=mxavdf">Portals</a>'
-    " • "
     '<emoji id="5418239967052724167">🏪</emoji> '
     '<a href="https://t.me/tonnel_network_bot/gifts?startapp=ref_5616264938">Tonnel</a>'
     " • "
-    '<emoji id="5409324297846026427">🗑️</emoji> '
-    '<a href="https://t.me/RemovedGiftsBot">Removed Gifts</a>'
+    '<emoji id="5409324297846026427">🎁</emoji> '
+    '<a href="https://t.me/RemovedGiftsBot?start=start">Removed Gifts</a>'
 )

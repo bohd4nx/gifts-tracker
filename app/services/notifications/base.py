@@ -19,7 +19,7 @@ async def send_msg(
         msg = await app.send_message(
             chat_id=config.CHANNEL_ID,
             text=text,
-            link_preview_options=link_preview,  # type: ignore[arg-type]
+            link_preview_options=link_preview,
         )
         return msg.id
     except FloodWait as e:

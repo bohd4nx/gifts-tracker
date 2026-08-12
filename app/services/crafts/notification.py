@@ -19,7 +19,7 @@ async def notify_craft(app: Client, gift: dict[str, Any]) -> None:
         return
 
     try:
-        variants = await app.get_gift_upgrade_variants(gift_id)  # type: ignore[attr-defined]
+        variants = await app.get_gift_upgrade_variants(gift_id)
         new_count = len(variants.models)
         old_count = (gift.get("raw") or {}).get("models_count") or 0
         delta = new_count - old_count
